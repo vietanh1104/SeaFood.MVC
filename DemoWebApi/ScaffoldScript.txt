@@ -1,0 +1,1 @@
+﻿Scaffold-DbContext "Data Source=V002952\MSSQLSERVER03;Initial Catalog=Seafood;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir ../BusinessLogic/WebApp.Domain/Entities -ContextDir ../Infrastructure/WebApp.Infrastructure -ContextNamespace WebApp.Infrastructure -Namespace WebApp.Domain.Entitie
