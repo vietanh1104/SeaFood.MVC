@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
 using WebApp.Domain.Entities;
 
 namespace WebApp.Infrastructure
@@ -11,8 +7,8 @@ namespace WebApp.Infrastructure
     {
         public SeafoodContext()
         {
-        }
 
+        }
         public SeafoodContext(DbContextOptions<SeafoodContext> options)
             : base(options)
         {

@@ -6,11 +6,14 @@ namespace WebApp.Application.Contracts.Infrastructure
 {
     public interface IUserRepository
     {
-        Task<User> Add(User user, CancellationToken cancellationToken = default);
+        Task<User> Add(User request, CancellationToken cancellationToken = default);
         Task<int> Delete(List<Guid> ls, CancellationToken cancellationToken = default);
-        Task<UserDto> GetById(List<Guid> ls, CancellationToken cancellationToken = default);
-        Task<PageResponse<UserDto>> Search(Guid roomId, string keyword, int page, int pageSize);
-        Task<User> Update(User user, CancellationToken cancellationToken = default);
+        Task<User> GetById(Guid id);
+        Task<PageResponse<UserDto>> Search(string? categoryCode, string? shopCode,
+            string? keyword, string? orderBy, bool isAsc, 
+            DateTime fromDate, DateTime toDate, 
+            int page, int pageSize);
+        Task<User> Update(User request, CancellationToken cancellationToken = default);
 
         // account
         Task<User> Login(string username, string passwordHash, CancellationToken cancellationToken = default);

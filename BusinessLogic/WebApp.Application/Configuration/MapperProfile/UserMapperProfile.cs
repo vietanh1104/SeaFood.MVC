@@ -9,6 +9,10 @@ namespace WebApp.Application.Configuration.MapperProfile
     {
         public UserMapperProfile()
         {
+            CreateMap<User, User>()
+                .ForMember(des => des.Id, opt => opt.Ignore())
+                .ForMember(des => des.CreatedAt, opt => opt.Ignore())
+                .ForMember(des => des.CreatedBy, opt => opt.Ignore());
             CreateMap<User, UserDto>();
             CreateMap<User, UserAddCommand>().ReverseMap();
         }
