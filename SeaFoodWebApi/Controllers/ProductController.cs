@@ -10,18 +10,41 @@ namespace SeaFoodWebApi.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public ProductController(IMediator mediator)
+        private readonly ILogger<ProductController> _logger;
+        public ProductController(IMediator mediator, ILogger<ProductController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
+        [Authorize]
         [HttpGet("get/{id}")]
-        public async Task<IActionResult> Detail(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            return Ok(await _mediator.Send(new ProductGetDetailById
+            try
             {
-                id = id
-            }));
+                return Ok(await _mediator.Send(new ProductGetDetailById
+                {
+                    id = id
+                }));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-
+        [Authorize]
+        [HttpPost("search")]
+        public async Task<IActionResult> Search([FromBody] ProductSearchQuery request)
+        {
+            try
+            {
+                return Ok(await _mediator.Send(request));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -6,12 +6,12 @@ namespace WebApp.Application.Contracts.Infrastructure
 {
     public interface IProductRepository
     {
-        Task<Product> Add(Product product, CancellationToken cancellationToken = default);
-        Task<Product> Update(Product product, CancellationToken cancellationToken = default);
+        Task<Product> Add(Product request, CancellationToken cancellationToken = default);
+        Task<Product> Update(Product request, CancellationToken cancellationToken = default);
         Task<int> Delete(List<Guid> ids, CancellationToken cancellationToken = default);
         Task<ProductDetailDto> GetById(Guid id);
-        Task<PageResponse<Product>> Search(string productName, string? keyword, string? orderBy, bool isAsc,
+        Task<PageResponse<ProductDto>> Search(string? categoryCode, string? shopCode, string? keyword, string? orderBy, bool isAsc,
             DateTime fromDate, DateTime toDate,
-            int page, int pageSize);    
+            int page = 1, int pageSize = 10);    
     }
 }

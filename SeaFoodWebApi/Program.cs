@@ -21,6 +21,24 @@ builder.Services.AddSwaggerGen(c => {
         Description = "JWT Authorization header using the Bearer scheme."
 
     });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+      {
+        {
+          new OpenApiSecurityScheme
+          {
+            Reference = new OpenApiReference
+              {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+              },
+              Scheme = "oauth2",
+              Name = "Bearer",
+              In = ParameterLocation.Header,
+
+            },
+            new List<string>()
+          }
+        });
 });
 builder.Services.AddRazorPages();
 // Add infrastructure extensions
@@ -35,16 +53,22 @@ AddSerilog(builder.Configuration);
 // route config
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
+//services cors
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseCors("corsapp");
 
 app.UseRouting();
 

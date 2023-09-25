@@ -39,7 +39,7 @@ namespace WebApp.Infrastructure
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=V002952\\MSSQLSERVER03;Initial Catalog=Seafood;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Server=V002952\\MSSQLSERVER03;Database=Seafood;User ID=sa;Password=Vti@1234;MultipleActiveResultSets=true;TrustServerCertificate=True");
                 //optionsBuilder.UseSqlite("TestDb");
             }
         }
